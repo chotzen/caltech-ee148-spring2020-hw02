@@ -19,7 +19,7 @@ def load_filters():
         f_img = np.asarray(f)
         filters.append(f_img.copy().astype(float))
 
-    return filters
+    return filters[0:1]
 
 
 def compute_convolution(I, T, stride=1):
@@ -247,7 +247,7 @@ for i in tqdm(range(len(file_names_train))):
 
 
 # save preds (overwrites any previous predictions!)
-with open(os.path.join(preds_path,'preds_train.json'),'w') as f:
+with open(os.path.join(preds_path,'weak_preds_train.json'),'w') as f:
     json.dump(preds_train,f)
 
 if done_tweaking:
@@ -266,5 +266,5 @@ if done_tweaking:
         preds_test[file_names_test[i]] = detect_red_light_mf(I)
 
     # save preds (overwrites any previous predictions!)
-    with open(os.path.join(preds_path,'preds_test.json'),'w') as f:
+    with open(os.path.join(preds_path,'weak_preds_test.json'),'w') as f:
         json.dump(preds_test,f)
